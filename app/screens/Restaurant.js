@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function topRestaurants() {
+export default function restaurant() {
   return (
     <View>
-      <Text>top</Text>
+      <Text>bienvenido a al app</Text>
     </View>
   );
 }
