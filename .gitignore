@@ -13,3 +13,4 @@ web-build/
 .DS_Store
 .vscode
 app/utils/firebase.js
+yarn.lock
