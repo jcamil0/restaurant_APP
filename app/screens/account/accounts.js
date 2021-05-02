@@ -16,7 +16,7 @@ export default function accounts() {
     });
   }, []);
 
-  if (login === null) return <Loadign />;
+  if (login === null) return <Loadign text="hola" isVisible={false} />;
 
   return login ? <UserLogin /> : <UserGuest />;
 }

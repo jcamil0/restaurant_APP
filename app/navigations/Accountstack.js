@@ -1,8 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Account from "../screens/account/accounts";
-
+import Login from "../screens/account/Login";
+import Register from "../screens/account/Register";
 const Stack = createStackNavigator();
 
 export default function Accountstack() {
@@ -16,8 +16,18 @@ export default function Accountstack() {
           title: "account",
         }}
       />
+      <Stack.Screen
+        name="login"
+        component={Login}
+        options={{
+          headerTitleStyle: { alignSelf: "center" },
+        }}
+      />
+      <Stack.Screen
+        name="register"
+        component={Register}
+        options={{ headerTitleStyle: { alignSelf: "center" } }}
+      />
     </Stack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({});
