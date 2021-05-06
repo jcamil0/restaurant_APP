@@ -18,11 +18,12 @@ export default function userGuest() {
         <Text style={styles.description}>
           aldklaksdlkaslkdlaskldkaslkdlksaldkalskas asldlaskdlaksldklaskdlkaslkd
         </Text>
+
         <Button
           title="ver tu perfil"
           containerStyle={styles.containerbutton}
           buttonStyle={styles.buttonStyle}
-          onPress={() => navigation.navigate("login")}
+          onPress={() => navigation.navigate("register")}
         />
       </View>
     </ScrollView>

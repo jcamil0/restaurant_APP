@@ -7,12 +7,23 @@ const Stack = createStackNavigator();
 
 export default function Accountstack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="register">
       <Stack.Screen
         name="account"
         component={Account}
         options={{
-          headerTitleStyle: { alignSelf: "center" },
+          headerTitleStyle: { alignSelf: "center", fontWeight: "bold" },
+          headerStyle: {
+            position: "absolute",
+            backgroundColor: "transparent",
+            zIndex: 100,
+            top: 0,
+            left: 0,
+            right: 0,
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
           title: "account",
         }}
       />
@@ -21,6 +32,17 @@ export default function Accountstack() {
         component={Login}
         options={{
           headerTitleStyle: { alignSelf: "center" },
+          headerStyle: {
+            position: "absolute",
+            backgroundColor: "transparent",
+            zIndex: 100,
+            top: 0,
+            left: 0,
+            right: 0,
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+          },
         }}
       />
       <Stack.Screen

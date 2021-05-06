@@ -1,23 +1,15 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { isEmpty, size } from "lodash";
-import * as firebase from "firebase";
 import { useNavigation } from "@react-navigation/native";
-
+import { Input, Button, Icon, SocialIcon } from "react-native-elements";
+import * as firebase from "firebase";
 import { validateEmail } from "../../utils/Validation";
-
 export default function Register() {
   const navigation = useNavigation();
 
-  const [password, setPassword] = useState(true);
-  const [repeatPassword, setrepeatPassword] = useState(true);
+  const [password, setPassword] = useState(false);
+  const [repeatPassword, setrepeatPassword] = useState(false);
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -62,27 +54,64 @@ export default function Register() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>login</Text>
-      <TextInput placeholder="usuario" onChange={(e) => onChange(e, "email")} />
+      <View style={styles.header}>
+        <Image
+          source={require("../../../assets/logo.png")}
+          style={styles.image}
+        />
+        <Text style={styles.title}>Welcome to app</Text>
+        <Text style={styles.subtitle}>Sign in to continue</Text>
+      </View>
 
-      <TextInput
-        placeholder="contraseña"
-        secureTextEntry={password}
-        onChange={(e) => onChange(e, "password")}
-      />
-      <TextInput
-        placeholder="repetir contrasela"
-        onChange={(e) => onChange(e, "repeatPassword")}
-        secureTextEntry={repeatPassword}
-      />
-      <TouchableOpacity
-        onPress={() => {
-          setPassword((prev) => !prev);
+      <View style={styles.inputsContainer}>
+        <Input
+          placeholder="your email"
+          onChange={(e) => onChange(e, "email")}
+        />
+        <Input
+          placeholder="password"
+          onChange={(e) => onChange(e, "password")}
+          secureTextEntry={password ? false : true}
+          rightIcon={
+            <Icon
+              name="eye-off"
+              type="material-community"
+              onPress={() => setPassword(!password)}
+            />
+          }
+        />
+        <Input
+          placeholder="repeat password"
+          onChange={(e) => onChange(e, "repeatPassword")}
+          rightIcon={
+            <Icon
+              name="eye-off"
+              type="material-community"
+              onPress={() => setrepeatPassword(!repeatPassword)}
+            />
+          }
+          secureTextEntry={repeatPassword ? false : true}
+        />
+      </View>
+
+      <Button
+        title="Register !!!"
+        onPress={onSubmit}
+        titleStyle={{
+          fontSize: 18,
         }}
-      >
-        <Text>ver contraseña</Text>
-      </TouchableOpacity>
-      <Button title="enviar datos" onPress={onSubmit} />
+        buttonStyle={[
+          styles.buttons,
+          {
+            backgroundColor: "green",
+            alignSelf: "flex-end",
+            width: "50%",
+            height: 60,
+          },
+        ]}
+      />
+      <SocialIcon type="google" style={styles.buttons} />
+      <SocialIcon type="facebook" style={styles.buttons} />
     </View>
   );
 }
@@ -90,10 +119,48 @@ export default function Register() {
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
+    marginLeft: 16,
+  },
+  header: {
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+  },
+  image: {
+    width: 120,
+    height: 120,
+    marginBottom: 16,
+    marginTop: 10,
   },
   title: {
+    fontSize: 16,
     textAlign: "center",
-    fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: "700",
+    fontStyle: "normal",
+    lineHeight: 20,
+    marginBottom: 8,
+    letterSpacing: 0.5,
+  },
+  subtitle: {
+    fontSize: 12,
+    fontWeight: "400",
+    fontStyle: "normal",
+    lineHeight: 21,
+    letterSpacing: 0.5,
+  },
+  inputsContainer: {
+    marginRight: 16,
+    marginTop: 10,
+  },
+  buttons: {
+    alignSelf: "flex-end",
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 0,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 0,
+    marginRight: 0,
+    width: "20%",
   },
 });
+/* 4A85A2 */
+/* 769ABE */
