@@ -18,7 +18,8 @@ export default function accounts() {
 
   if (login === null) return <Loadign text="hola" isVisible={false} />;
 
-  return login ? <UserLogin /> : <UserGuest />;
+  // return login ? <UserLogin /> : <UserGuest />;
+  return <UserLogin />;
 }
 
 const styles = StyleSheet.create({});

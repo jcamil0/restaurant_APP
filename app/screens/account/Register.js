@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
+import { Button, Icon, Input } from "react-native-elements";
 import { isEmpty, size } from "lodash";
 import { useNavigation } from "@react-navigation/native";
-import { Input, Button, Icon, SocialIcon } from "react-native-elements";
+import Toast from "../../components/Toast";
 import * as firebase from "firebase";
 import { validateEmail } from "../../utils/Validation";
+import { TextInput } from "react-native";
+import { TouchableOpacity } from "react-native";
+
 export default function Register() {
   const navigation = useNavigation();
-
   const [password, setPassword] = useState(false);
   const [repeatPassword, setrepeatPassword] = useState(false);
   const [form, setForm] = useState({
@@ -31,24 +34,19 @@ export default function Register() {
       console.log("la contraseña debe tener 6 caracteres");
     } else {
       console.log("ok");
-
       firebase.default
         .auth()
         .createUserWithEmailAndPassword(form.email, form.password)
         .then(() => {
           navigation.navigate("account");
         })
-
         .catch((error) => {
           console.log(error);
         });
     }
-    /* console.log(form);
-    console.log(validateEmail(form.email)); */
   };
 
   const onChange = (e, type) => {
-    /* console.log(e.nativeEvent.text); */
     setForm({ ...form, [type]: e.nativeEvent.text });
   };
 
@@ -59,59 +57,69 @@ export default function Register() {
           source={require("../../../assets/logo.png")}
           style={styles.image}
         />
-        <Text style={styles.title}>Welcome to app</Text>
-        <Text style={styles.subtitle}>Sign in to continue</Text>
+        <Text style={styles.title}>Let’s Get Started</Text>
+        <Text style={styles.subtitle}>Create an new account</Text>
       </View>
 
       <View style={styles.inputsContainer}>
         <Input
+          inputStyle={styles.campusInput}
+          containerStyle={{ paddingHorizontal: 0 }}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
           placeholder="your email"
           onChange={(e) => onChange(e, "email")}
+          leftIcon={<Icon name="account" type="material-community" />}
         />
+
         <Input
+          inputStyle={styles.campusInput}
+          containerStyle={{ paddingHorizontal: 0 }}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
           placeholder="password"
           onChange={(e) => onChange(e, "password")}
           secureTextEntry={password ? false : true}
-          rightIcon={
+          leftIcon={
             <Icon
-              name="eye-off"
+              name={password ? "eye" : "eye-off"}
               type="material-community"
               onPress={() => setPassword(!password)}
             />
           }
         />
         <Input
+          inputStyle={styles.campusInput}
+          containerStyle={{ paddingHorizontal: 0 }}
+          inputContainerStyle={{ borderBottomWidth: 0 }}
           placeholder="repeat password"
           onChange={(e) => onChange(e, "repeatPassword")}
-          rightIcon={
+          secureTextEntry={repeatPassword ? false : true}
+          leftIcon={
             <Icon
-              name="eye-off"
+              name={repeatPassword ? "eye" : "eye-off"}
               type="material-community"
               onPress={() => setrepeatPassword(!repeatPassword)}
             />
           }
-          secureTextEntry={repeatPassword ? false : true}
         />
       </View>
 
       <Button
-        title="Register !!!"
+        title="Register"
+        titleStyle={styles.buttonTitle}
+        buttonStyle={styles.buttonStyle}
+        containerStyle={styles.buttonContainer}
         onPress={onSubmit}
-        titleStyle={{
-          fontSize: 18,
-        }}
-        buttonStyle={[
-          styles.buttons,
-          {
-            backgroundColor: "green",
-            alignSelf: "flex-end",
-            width: "50%",
-            height: 60,
-          },
-        ]}
       />
-      <SocialIcon type="google" style={styles.buttons} />
-      <SocialIcon type="facebook" style={styles.buttons} />
+
+      <TouchableOpacity
+        style={styles.footerTextItem}
+        onPress={() => navigation.navigate("login")}
+      >
+        <Text style={styles.footerText}>
+          have a account?{" "}
+          <Text style={{ color: "#40BFFF", fontWeight: "400" }}>Sign In</Text>
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -120,11 +128,13 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     marginLeft: 16,
+    marginRight: 16,
   },
   header: {
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
+    marginBottom: 84,
   },
   image: {
     width: 120,
@@ -148,19 +158,42 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.5,
   },
-  inputsContainer: {
-    marginRight: 16,
-    marginTop: 10,
+
+  campusInput: {
+    fontSize: 20,
+    paddingVertical: 0,
+    paddingTop: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
+    paddingLeft: 0,
+    backgroundColor: "#fff",
+    color: "#424242",
   },
-  buttons: {
-    alignSelf: "flex-end",
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 0,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 0,
-    marginRight: 0,
-    width: "20%",
+
+  buttonContainer: {
+    marginBottom: 21,
+  },
+  buttonStyle: {
+    padding: 16,
+  },
+  buttonTitle: {
+    fontWeight: "700",
+    fontStyle: "normal",
+    fontSize: 14,
+    textAlign: "center",
+    letterSpacing: 0.5,
+  },
+
+  footerTextItem: {
+    alignItems: "center",
+    marginTop: 24,
+  },
+  footerText: {
+    fontSize: 12,
+    fontStyle: "normal",
+    fontWeight: "400",
+    lineHeight: 18,
+    letterSpacing: 0.5,
+    textAlign: "center",
   },
 });
-/* 4A85A2 */
-/* 769ABE */
