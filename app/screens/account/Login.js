@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import { Button } from "react-native-elements";
-import * as firebase from "firebase";
-import { isEmpty, size } from "lodash";
 import { useNavigation } from "@react-navigation/native";
-
+import { Icon, Button } from "react-native-elements";
+import * as firebase from "firebase";
+import { isEmpty } from "lodash";
 import { validateEmail } from "../../utils/Validation";
-import { Icon, Input } from "react-native-elements";
+import CustomTextInput from "../../components/Inputs";
 
 export default function Login() {
   const navigation = useNavigation();
@@ -15,7 +14,6 @@ export default function Login() {
     email: "",
     password: "",
   });
-
   const onSubmit = () => {
     if (isEmpty(form.email) || isEmpty(form.password)) {
       console.log("todos los campos son oblgatorioa");
@@ -50,20 +48,14 @@ export default function Login() {
         <Text style={styles.subtitle}>Sign in to continue</Text>
       </View>
       <View style={styles.inputsContainer}>
-        <Input
-          inputStyle={styles.campusInput}
-          containerStyle={{ paddingHorizontal: 0 }}
-          inputContainerStyle={{ borderBottomWidth: 0 }}
-          placeholder="your email"
+        <CustomTextInput
+          title="your email"
           onChange={(e) => onChange(e, "email")}
           leftIcon={<Icon name="account" type="material-community" />}
         />
 
-        <Input
-          inputStyle={styles.campusInput}
-          containerStyle={{ paddingHorizontal: 0 }}
-          inputContainerStyle={{ borderBottomWidth: 0 }}
-          placeholder="password"
+        <CustomTextInput
+          title="password"
           onChange={(e) => onChange(e, "password")}
           secureTextEntry={password ? false : true}
           leftIcon={
@@ -75,6 +67,7 @@ export default function Login() {
           }
         />
       </View>
+
       <Button
         title="Sign In"
         titleStyle={styles.buttonTitle}
@@ -159,24 +152,6 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.5,
     marginBottom: 28,
-  },
-
-  campusInput: {
-    fontSize: 20,
-    paddingVertical: 0,
-    paddingTop: 10,
-    paddingRight: 10,
-    paddingBottom: 10,
-    paddingLeft: 0,
-    backgroundColor: "#fff",
-    color: "#424242",
-  },
-
-  buttonContainer: {
-    marginBottom: 21,
-  },
-  buttonStyle: {
-    padding: 16,
   },
   buttonTitle: {
     fontWeight: "700",

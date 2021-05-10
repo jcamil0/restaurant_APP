@@ -6,7 +6,6 @@ import { useNavigation } from "@react-navigation/native";
 import Toast from "../../components/Toast";
 import * as firebase from "firebase";
 import { validateEmail } from "../../utils/Validation";
-import { TextInput } from "react-native";
 import { TouchableOpacity } from "react-native";
 
 export default function Register() {
@@ -126,6 +125,7 @@ export default function Register() {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "center",
     marginLeft: 16,
     marginRight: 16,
