@@ -74,13 +74,12 @@ function AddImages(props) {
       Permissions.CAMERA_ROLL
     );
     if (resultPermissions === "denied") {
-      console.log("no hay permisos");
+      /*   console.log("toast"); */
     } else {
       const result = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
         aspect: [4, 3],
       });
-      /*   console.log(result); */
       if (result.cancelled) {
         console.log("no ha selacionado una imagen");
       } else {

@@ -22,11 +22,11 @@ export default function navigations() {
           tabBarIcon: ({ color }) => screenOptions(route, color),
         })}
       >
+        <Tab.Screen name="account" component={Accountstack} />
         <Tab.Screen name="restaurant" component={Restaurantstack} />
         <Tab.Screen name="toprestaurant" component={TopRestaurantStack} />
         <Tab.Screen name="search" component={SearchStack} />
         <Tab.Screen name="favorites" component={FavoritesStack} />
-        <Tab.Screen name="account" component={Accountstack} />
       </Tab.Navigator>
     </NavigationContainer>
   );
